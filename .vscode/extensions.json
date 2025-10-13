@@ -1,9 +1,0 @@
-{
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-    "editorconfig.editorconfig",
-    "github.vscode-github-actions",
-    "lokalise.i18n-ally"
-  ]
-}

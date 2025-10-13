@@ -1,0 +1,16 @@
+export default defineNuxtConfig({
+  modules: [
+    '@pinia/nuxt',
+    '@nuxt/eslint',
+  ],
+  devtools: { enabled: true },
+  compatibilityDate: '2025-07-15',
+  eslint: {
+    config: {
+      standalone: false,
+      nuxt: {
+        sortConfigKeys: true,
+      },
+    },
+  },
+})

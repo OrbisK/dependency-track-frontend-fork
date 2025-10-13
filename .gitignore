@@ -1,31 +1,26 @@
-.DS_Store
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
 node_modules
-/dist
-/coverage
 
-/tests/e2e/reports/
-selenium-debug.log
+# Logs
+logs
+*.log
 
-# local env files
-.env.local
-.env.*.local
+# Misc
+.DS_Store
+.fleet
+.idea
 
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Local env files
+.env
+.env.*
+!.env.example
 
-# Editor directories and files
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw*
-
-# Generates as part of serve
-src/version.json
-
-# IntelliJ
-.idea/*
-!.idea/icon.svg
+old
