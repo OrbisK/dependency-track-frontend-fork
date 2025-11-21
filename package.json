@@ -8,6 +8,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "lint": "eslint .",
+    "lint:fix": "pnpm lint --fix",
     "typecheck": "nuxt typecheck",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -15,14 +16,20 @@
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",
     "@nuxt/eslint": "catalog:dev",
+    "@nuxt/ui": "catalog:frontend",
     "@pinia/nuxt": "catalog:build",
+    "@vueuse/integrations": "catalog:frontend",
+    "@vueuse/nuxt": "catalog:build",
+    "defu": "catalog:build",
     "eslint": "catalog:dev",
     "eslint-plugin-format": "catalog:dev",
+    "jwt-decode": "catalog:build",
     "nuxt": "catalog:build",
     "pinia": "catalog:frontend",
     "typescript": "catalog:dev",
     "vue": "catalog:frontend",
     "vue-router": "catalog:frontend",
-    "vue-tsc": "catalog:dev"
+    "vue-tsc": "catalog:dev",
+    "zod": "catalog:build"
   }
 }
