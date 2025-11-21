@@ -1,0 +1,34 @@
+export interface ApiMetric {
+  critical: number
+  high: number
+  medium: number
+  low: number
+  unassigned: number
+  vulnerabilities: number
+  projects: number
+  vulnerableProjects: number
+  components: number
+  vulnerableComponents: number
+  suppressed: number
+  findingsTotal: number
+  findingsAudited: number
+  findingsUnaudited: number
+  inheritedRiskScore: number
+  policyViolationsFail: number
+  policyViolationsWarn: number
+  policyViolationsInfo: number
+  policyViolationsTotal: number
+  policyViolationsAudited: number
+  policyViolationsUnaudited: number
+  policyViolationsSecurityTotal: number
+  policyViolationsSecurityAudited: number
+  policyViolationsSecurityUnaudited: number
+  policyViolationsLicenseTotal: number
+  policyViolationsLicenseAudited: number
+  policyViolationsLicenseUnaudited: number
+  policyViolationsOperationalTotal: number
+  policyViolationsOperationalAudited: number
+  policyViolationsOperationalUnaudited: number
+  firstOccurrence: number
+  lastOccurrence: number
+}

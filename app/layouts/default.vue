@@ -6,59 +6,84 @@ const route = useRoute()
 const open = shallowRef(false)
 
 const links = [[{
-  label: 'Home',
+  label: 'Dashboard',
   icon: 'i-lucide-house',
-  to: '/',
+  to: '/dashboard',
   onSelect: () => {
     open.value = false
   },
 }, {
-  label: 'Inbox',
-  icon: 'i-lucide-inbox',
-  to: '/inbox',
-  badge: '4',
+  label: 'Portfolio',
+  type: 'label',
+}, {
+  label: 'Projects',
+  to: '/projects',
+  icon: 'i-lucide-folder-tree',
   onSelect: () => {
     open.value = false
   },
 }, {
-  label: 'Customers',
-  icon: 'i-lucide-users',
-  to: '/customers',
+  label: 'Components',
+  icon: 'i-lucide-boxes',
+  to: '/components',
   onSelect: () => {
     open.value = false
   },
 }, {
-  label: 'Settings',
-  to: '/settings',
+  label: 'Vulnerabilities',
+  icon: 'i-lucide-shield-half',
+  to: '/vulnerabilities',
+  onSelect: () => {
+    open.value = false
+  },
+}, {
+  label: 'Licenses',
+  icon: 'i-lucide-scale',
+  to: '/licenses',
+  onSelect: () => {
+    open.value = false
+  },
+}, {
+  label: 'Tags',
+  icon: 'i-lucide-tags',
+  to: '/tags',
+  onSelect: () => {
+    open.value = false
+  },
+}, {
+  label: 'Global Audit',
+  type: 'label',
+}, {
+  label: 'Vulnerability Audit',
+  icon: 'i-lucide-shield-question-mark',
+  to: '/vulnerabilityAudit',
+  onSelect: () => {
+    open.value = false
+  },
+}, {
+  label: 'Policy Violation Audit',
+  icon: 'i-lucide-package-search',
+  to: '/policyViolationAudit',
+  onSelect: () => {
+    open.value = false
+  },
+}, {
+  label: 'Administration',
+  type: 'label',
+}, {
+  label: 'Policy Management',
+  icon: 'i-lucide-award',
+  to: '/policy',
+  onSelect: () => {
+    open.value = false
+  },
+}, {
+  label: 'Administration',
   icon: 'i-lucide-settings',
-  defaultOpen: true,
-  type: 'trigger',
-  children: [{
-    label: 'General',
-    to: '/settings',
-    exact: true,
-    onSelect: () => {
-      open.value = false
-    },
-  }, {
-    label: 'Members',
-    to: '/settings/members',
-    onSelect: () => {
-      open.value = false
-    },
-  }, {
-    label: 'Notifications',
-    to: '/settings/notifications',
-    onSelect: () => {
-      open.value = false
-    },
-  }, {
-    label: 'Security',
-    to: '/settings/security',
-    onSelect: () => {
-      open.value = false
-    },
-  }],
+  to: '/todo',
+  onSelect: () => {
+    open.value = false
+  },
 }], [{
   label: 'Feedback',
   icon: 'i-lucide-message-circle',
@@ -99,11 +124,11 @@ const groups = computed(() => [{
       :ui="{ footer: 'lg:border-t lg:border-default' }"
     >
       <template #header="{ collapsed }">
-        <span>{{ collapsed ? 'Logo small' : 'logo large' }}</span>
+        <AppLogo :collapsed="collapsed" class="mx-auto h-full py-2" />
       </template>
 
       <template #default="{ collapsed }">
-        <UDashboardSearchButton :collapsed="collapsed" class="bg-transparent ring-default" />
+        <!--        <UDashboardSearchButton :collapsed="collapsed" class="bg-transparent ring-default" /> -->
 
         <UNavigationMenu
           :collapsed="collapsed"
