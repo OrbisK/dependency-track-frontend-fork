@@ -5,6 +5,8 @@ const { metrics } = defineProps<{
   metrics: ApiMetric[]
 }>()
 
+const { locale } = useI18n()
+
 const portfolioChartConfig = [
   { key: 'critical', color: 'var(--ui-error)' },
   { key: 'high', color: 'orange' },
@@ -34,52 +36,58 @@ const portfolioChartData = computed(() => {
     <template #header>
       <div>
         <p v-if="metrics.at(-1)?.firstOccurrence" class="text-xs text-muted uppercase mb-1.5">
-          Last Measurement: <NuxtTime year="numeric" month="2-digit" day="2-digit" hour="2-digit" minute="2-digit" second="2-digit" :datetime="metrics.at(-1)!.lastOccurrence" />
+          <i18n-t keypath="portfolio-vulnerabilities.latest-measurement">
+            <template #datetime>
+              <TimeLocale
+                year="numeric"
+                month="2-digit"
+                day="2-digit"
+                hour="2-digit"
+                minute="2-digit"
+                second="2-digit"
+                :datetime="metrics.at(-1)!.lastOccurrence"
+                :locale="locale"
+              />
+            </template>
+          </i18n-t>
         </p>
-        <p class="text-3xl text-highlighted font-semibold">
-          Portfolio Vulnerabilities
-        </p>
+        <i18n-t tag="p" class="text-3xl text-highlighted font-semibold" keypath="portfolio-vulnerabilities.title" />
       </div>
     </template>
     <LineChart class="h-96" :data="portfolioChartData" :config="portfolioChartConfig" />
     <template #footer>
       <div class="grid grid-cols-5 gap-2 w-full">
-        <UPageCard variant="soft">
-          <div class="flex flex-col items-center">
-            <p>Critical</p>
-            <p>0 (0%)</p>
-            <UProgress :model-value="0" />
-          </div>
-        </UPageCard>
-        <UPageCard variant="soft">
-          <div class="flex flex-col items-center">
-            <p>High</p>
-            <p>0 (0%)</p>
-            <UProgress :model-value="0" />
-          </div>
-        </UPageCard>
-        <UPageCard variant="soft">
-          <div class="flex flex-col items-center">
-            <p>Medium</p>
-            <p>0 (0%)</p>
-            <UProgress :model-value="0" />
-          </div>
-        </UPageCard>
-        <UPageCard variant="soft">
-          <div class="flex flex-col items-center">
-            <p>Low</p>
-            <p>0 (0%)</p>
-            <UProgress :model-value="0" />
-          </div>
-        </UPageCard>
-        <UPageCard variant="soft">
-          <div class="flex flex-col items-center">
-            <p>Unsassigned</p>
-            <p>0 (0%)</p>
-            <UProgress :model-value="0" />
-          </div>
-        </UPageCard>
+        <DashboardProgressCard variant="soft">
+          <p>Critical</p>
+        </DashboardProgressCard>
+        <DashboardProgressCard variant="soft">
+          <p>High</p>
+          <p>0 (0%)</p>
+        </DashboardProgressCard>
+        <DashboardProgressCard variant="soft">
+          <p>Medium</p>
+          <p>0 (0%)</p>
+        </DashboardProgressCard>
+        <DashboardProgressCard variant="soft">
+          <p>Low</p>
+          <p>0 (0%)</p>
+        </DashboardProgressCard>
+        <DashboardProgressCard variant="soft">
+          <p>Unsassigned</p>
+          <p>0 (0%)</p>
+        </DashboardProgressCard>
       </div>
     </template>
   </UCard>
 </template>
+
+<i18n lang="yaml">
+en:
+  portfolio-vulnerabilities:
+    title: "Portfolio Vulnerabilities"
+    latest-measurement: "Last Measurement: {datetime}"
+de:
+  portfolio-vulnerabilities:
+    title: "Portfolio Vulnerabilities"
+    latest-measurement: "Letzte Messung: {datetime}"
+</i18n>

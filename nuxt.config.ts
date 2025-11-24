@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxt/ui', '@vueuse/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxt/ui', '@vueuse/nuxt', '@nuxtjs/i18n'],
   devtools: { enabled: true },
   app: {
     head: {
@@ -33,5 +33,12 @@ export default defineNuxtConfig({
         sortConfigKeys: true,
       },
     },
+  },
+  i18n: {
+    defaultLocale: 'en',
+    locales: [
+      { code: 'en', name: 'English' },
+      { code: 'de', name: 'German' },
+    ],
   },
 })
