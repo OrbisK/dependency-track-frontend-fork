@@ -5,7 +5,9 @@ const { metrics } = defineProps<{
   metrics: ApiMetric[]
 }>()
 
-const { locale } = useI18n()
+const { locale, t } = useI18n({
+  useScope: 'local',
+})
 
 const portfolioChartConfig = [
   { key: 'critical', color: 'var(--ui-error)' },
@@ -28,6 +30,10 @@ const portfolioChartData = computed(() => {
       },
     } as const
   })
+})
+
+const latestMetric = computed(() => {
+  return metrics.at(-1)
 })
 </script>
 
@@ -57,25 +63,36 @@ const portfolioChartData = computed(() => {
     <LineChart class="h-96" :data="portfolioChartData" :config="portfolioChartConfig" />
     <template #footer>
       <div class="grid grid-cols-5 gap-2 w-full">
-        <DashboardProgressCard variant="soft">
-          <p>Critical</p>
-        </DashboardProgressCard>
-        <DashboardProgressCard variant="soft">
-          <p>High</p>
-          <p>0 (0%)</p>
-        </DashboardProgressCard>
-        <DashboardProgressCard variant="soft">
-          <p>Medium</p>
-          <p>0 (0%)</p>
-        </DashboardProgressCard>
-        <DashboardProgressCard variant="soft">
-          <p>Low</p>
-          <p>0 (0%)</p>
-        </DashboardProgressCard>
-        <DashboardProgressCard variant="soft">
-          <p>Unsassigned</p>
-          <p>0 (0%)</p>
-        </DashboardProgressCard>
+        <DashboardProgressCard
+          variant="soft"
+          :value="latestMetric?.critical"
+          :total="latestMetric?.vulnerabilities"
+          :title="t('portfolio-vulnerabilities.summary.critical')"
+        />
+        <DashboardProgressCard
+          variant="soft"
+          :value="latestMetric?.high"
+          :total="latestMetric?.vulnerabilities"
+          :title="t('portfolio-vulnerabilities.summary.high')"
+        />
+        <DashboardProgressCard
+          variant="soft"
+          :value="latestMetric?.medium"
+          :total="latestMetric?.vulnerabilities"
+          :title="t('portfolio-vulnerabilities.summary.medium')"
+        />
+        <DashboardProgressCard
+          variant="soft"
+          :value="latestMetric?.low"
+          :total="latestMetric?.vulnerabilities"
+          :title="t('portfolio-vulnerabilities.summary.medium')"
+        />
+        <DashboardProgressCard
+          variant="soft"
+          :value="latestMetric?.unassigned"
+          :total="latestMetric?.vulnerabilities"
+          :title="t('portfolio-vulnerabilities.summary.unassigned')"
+        />
       </div>
     </template>
   </UCard>
@@ -86,8 +103,20 @@ en:
   portfolio-vulnerabilities:
     title: "Portfolio Vulnerabilities"
     latest-measurement: "Last Measurement: {datetime}"
+    summary:
+      critical: "Critical"
+      high: "High"
+      medium: "High"
+      low: "Low"
+      unassigned: "Unassigned"
 de:
   portfolio-vulnerabilities:
-    title: "Portfolio Vulnerabilities"
+    title: "Portfolio Schwachstellen"
     latest-measurement: "Letzte Messung: {datetime}"
+    summary:
+      critical: "Kritisch"
+      high: "Hoch"
+      medium: "Mittel"
+      low: "Niedrig"
+      unassigned: "Nicht zugewiesen"
 </i18n>

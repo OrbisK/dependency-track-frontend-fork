@@ -11,26 +11,30 @@ interface Stat {
   to?: string // todo -> link does not work with hover atm
 }
 
+const { t } = useI18n({
+  useScope: 'local',
+})
+
 const stats = computed<Stat[]>(() => {
   // todo link with querys
   return [
     {
-      title: 'Portfolio Vulnerabilities',
+      title: t('vulnerabilities'),
       key: 'vulnerabilities',
       // to: '/vulnerabilities',
     },
     {
-      title: 'Projects at Risk',
+      title: t('vulnerableProjects'),
       key: 'vulnerableProjects',
       // to: '/projects',
     },
     {
-      title: 'Vulnerable Components',
+      title: t('vulnerableComponents'),
       key: 'vulnerableComponents',
       // to: '/components',
     },
     {
-      title: 'Inherited Risk Score',
+      title: t('inheritedRiskScore'),
       key: 'inheritedRiskScore',
       // to: '/todo',
     },
@@ -71,3 +75,16 @@ const chartData = computed(() => {
     />
   </UPageCard>
 </template>
+
+<i18n lang="yaml">
+en:
+  vulnerabilities: "Portfolio Vulnerabilities"
+  vulnerableProjects: "Vulnerable Projects"
+  vulnerableComponents: "Vulnerable Components"
+  inheritedRiskScore: "Inherited Risk Score"
+de:
+  vulnerabilities: "Portfolio Schwachstellen"
+  vulnerableProjects: "Gefährdete Projekte"
+  vulnerableComponents: "Gefährdete Komponenten"
+  inheritedRiskScore: "Vererbter Risikowert"
+</i18n>

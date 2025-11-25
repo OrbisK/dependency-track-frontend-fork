@@ -16,6 +16,7 @@ catalogs:
     vue-tsc: ^3.1.1
   frontend:
     '@nuxt/ui': ^4.2.1
+    '@nuxtjs/i18n': 10.2.1
     '@unovis/ts': ^1.6.2
     '@unovis/vue': ^1.6.2
     '@vueuse/integrations': ^14.0.0

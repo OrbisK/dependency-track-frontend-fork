@@ -14,22 +14,29 @@ const user = ref({
   },
 })
 
+const { t } = useI18n({
+  useScope: 'local',
+})
+
+const localeRoute = useLocaleRoute()
+
 const items = computed<DropdownMenuItem[][]>(() => ([[{
   type: 'label',
   label: user.value.name,
   avatar: user.value.avatar,
 }], [{
-  label: 'Profile',
+  label: t('profile'),
   icon: 'i-lucide-user',
+  to: localeRoute({ name: 'profile' }),
 }, {
-  label: 'Settings',
+  label: t('settings'),
   icon: 'i-lucide-settings',
-  to: '/settings',
+  to: localeRoute({ name: 'settings' }),
 }], [{
-  label: 'Appearance',
+  label: t('appearance'),
   icon: 'i-lucide-sun-moon',
   children: [{
-    label: 'Light',
+    label: t('light'),
     icon: 'i-lucide-sun',
     type: 'checkbox',
     checked: colorMode.value === 'light',
@@ -39,7 +46,7 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
       colorMode.preference = 'light'
     },
   }, {
-    label: 'Dark',
+    label: t('dark'),
     icon: 'i-lucide-moon',
     type: 'checkbox',
     checked: colorMode.value === 'dark',
@@ -53,17 +60,17 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
     },
   }],
 }], [{
-  label: 'Documentation',
+  label: t('documentation'),
   icon: 'i-lucide-book-open',
   to: 'https://dependencytrack.org/',
   target: '_blank',
 }, {
-  label: 'GitHub repository',
+  label: t('github-repository'),
   icon: 'i-simple-icons-github',
   to: 'https://github.com/DependencyTrack/frontend',
   target: '_blank',
 }, {
-  label: 'Log out',
+  label: t('log-out'),
   icon: 'i-lucide-log-out',
 }]]))
 </script>
@@ -103,3 +110,25 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
     </template>
   </UDropdownMenu>
 </template>
+
+<i18n lang="yaml">
+en:
+  profile: "Profile"
+  settings: "Settings"
+  appearance: "Appearance"
+  light: "Light"
+  dark: "Dark"
+  documentation: "Documentation"
+  github-repository: "GitHub repository"
+  log-out: "Log out"
+
+de:
+  profile: "Profil"
+  settings: "Einstellungen"
+  appearance: "Erscheinungsbild"
+  light: "Hell"
+  dark: "Dunkel"
+  documentation: "Dokumentation"
+  github-repository: "GitHub Repository"
+  log-out: "Abmelden"
+</i18n>

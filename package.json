@@ -17,7 +17,7 @@
     "@antfu/eslint-config": "catalog:dev",
     "@nuxt/eslint": "catalog:dev",
     "@nuxt/ui": "catalog:frontend",
-    "@nuxtjs/i18n": "10.2.1",
+    "@nuxtjs/i18n": "catalog:frontend",
     "@pinia/nuxt": "catalog:build",
     "@unovis/ts": "catalog:frontend",
     "@unovis/vue": "catalog:frontend",

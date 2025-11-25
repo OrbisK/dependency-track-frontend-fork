@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { CardProps } from '@nuxt/ui'
 
-const props = defineProps<CardProps & { value?: number, total?: number }>()
+const props = defineProps<CardProps & { value?: number, total?: number, title?: string }>()
 
 const progress = computed(() => {
   return (props.value !== undefined && props.total !== undefined && props.total > 0)
@@ -14,10 +14,14 @@ useI18n()
 </script>
 
 <template>
-  <UCard v-bind="$props">
+  <UCard v-bind="props">
     <div class="flex flex-col items-center">
-      <slot />
-      <i18n-t tag="p" keypath="progress">
+      <slot>
+        <p class="text-xs text-muted uppercase">
+          {{ props.title }}
+        </p>
+      </slot>
+      <i18n-t tag="p" keypath="progress" class="font-semibold">
         <template #value>
           {{ props.value ?? 0 }}
         </template>

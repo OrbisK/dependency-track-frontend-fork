@@ -16,15 +16,20 @@ const y = config.map(({ key }) => {
   return (d: DataRecord) => d.values[key]
 })
 
-const formatDate = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric' }).format
+const { locale } = useI18n()
 
-function xTicks(i: number) {
-  if (i === 0 || i === data.length - 1 || !data[i]) {
-    return ''
+const formatDate = computed(() => new Intl.DateTimeFormat(locale.value, { month: 'short', day: 'numeric' }).format)
+
+const xTickFormat = computed(() => {
+  const formatter = formatDate.value
+  return (i: number) => {
+    if (i === 0 || i === data.length - 1 || !data[i]) {
+      return ''
+    }
+
+    return formatter(data[i].date)
   }
-
-  return formatDate(data[i].date)
-}
+})
 
 function color(d: DataRecord, i: number) {
   return config[i]?.color ?? 'var(--ui-primary)'
@@ -53,7 +58,7 @@ function color(d: DataRecord, i: number) {
       <VisAxis
         type="x"
         :x="x"
-        :tick-format="xTicks"
+        :tick-format="xTickFormat"
       />
 
       <VisAxis
