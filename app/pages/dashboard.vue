@@ -4,7 +4,7 @@ import * as locales from '@nuxt/ui/locale'
 
 const { $api } = useNuxtApp()
 
-const { data: metrics } = await useAsyncData('dashboard-metrics', (_, { signal }) => {
+const { data: metrics } = await useAsyncData('portfolio-metrics-90-days', (_, { signal }) => {
   return $api<ApiMetric[]>('v1/metrics/portfolio/90/days', { signal })
 }, { default: () => [] })
 
@@ -37,10 +37,7 @@ const localeOptions = computed(() => {
       <UPageGrid class="lg:grid-cols-4 gap-4 sm:gap-6">
         <DashboardStats :metrics="metrics" />
         <DashboardPortfolio :metrics="metrics" />
-        <DashboardPolicyViolations :metrics="metrics" />
-      <!--      <HomeStats :period="period" :range="range" /> -->
-      <!--      <HomeChart :period="period" :range="range" /> -->
-      <!--      <HomeSales :period="period" :range="range" /> -->
+        <DashboardPolicyViolationsState :metrics="metrics" />
       </UPageGrid>
     </template>
   </UDashboardPanel>

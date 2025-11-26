@@ -27,6 +27,10 @@ const policyViolationChartConfig = [
   { key: 'policyViolationsWarn', color: 'var(--ui-warning)' },
   { key: 'policyViolationsInfo', color: 'var(--ui-info)' },
 ] satisfies { key: keyof ApiMetric, color?: string }[] // todo
+
+const latestMetric = computed(() => {
+  return metrics.at(-1)
+})
 </script>
 
 <template>
@@ -37,9 +41,31 @@ const policyViolationChartConfig = [
     class="md:col-span-2 col-span-4"
   >
     <LineChart class="h-96" :data="policyViolationChartData" :config="policyViolationChartConfig" />
-    <!--    <template #footer> -->
-    <!--      footer -->
-    <!--    </template> -->
+    <template #footer>
+      <div class="grid grid-cols-3 gap-2 w-full">
+        <DashboardProgressCard
+          class="lg:col-span-1 col-span-5"
+          variant="soft"
+          :value="latestMetric?.policyViolationsFail"
+          :total="latestMetric?.policyViolationsTotal"
+          :title="t('summary.policy-violations-fail')"
+        />
+        <DashboardProgressCard
+          class="lg:col-span-1 col-span-5"
+          variant="soft"
+          :value="latestMetric?.policyViolationsWarn"
+          :total="latestMetric?.policyViolationsTotal"
+          :title="t('summary.policy-violations-warn')"
+        />
+        <DashboardProgressCard
+          class="lg:col-span-1 col-span-5"
+          variant="soft"
+          :value="latestMetric?.policyViolationsInfo"
+          :total="latestMetric?.policyViolationsTotal"
+          :title="t('summary.policy-violations-info')"
+        />
+      </div>
+    </template>
   </DashboardCard>
 </template>
 
@@ -47,7 +73,15 @@ const policyViolationChartConfig = [
 en:
   title: "Policy Violations"
   subtitle: "Policy violations by state"
+  summary:
+    policy-violations-fail: "Violation Failures"
+    policy-violations-warn: "Violation Warnings"
+    policy-violations-info: "Violation Information"
 de:
   title: "Richtlinienverstöße"
   subtitle: "Richtlinienverstöße nach Status"
+  summary:
+    policy-violations-fail: "Verstoßfehler"
+    policy-violations-warn: "Verstoßwarnungen"
+    policy-violations-info: "Verstoßinformationen"
 </i18n>
