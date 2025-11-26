@@ -1,2 +1,18 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
+
+
+@theme static {
+    /* Define new custom color */
+    --color-brand-50: #ffe8fb;
+    --color-brand-100: #ffb9f2;
+    --color-brand-200: #ff8be9;
+    --color-brand-300: #ff5de0;
+    --color-brand-400: #ff2ed8;
+    --color-brand-500: #ff00cf;
+    --color-brand-600: #d100a9;
+    --color-brand-700: #a20084;
+    --color-brand-800: #74005e;
+    --color-brand-900: #460038;
+    --color-brand-950: #170013;
+}
