@@ -38,56 +38,56 @@ const latestMetric = computed(() => {
 </script>
 
 <template>
-  <UCard :ui="{ root: 'overflow-visible', body: '!p-0' }" class="col-span-4">
-    <template #header>
-      <div>
-        <p v-if="metrics.at(-1)?.firstOccurrence" class="text-xs text-muted uppercase mb-1.5">
-          <i18n-t keypath="portfolio-vulnerabilities.latest-measurement">
-            <template #datetime>
-              <TimeLocale
-                year="numeric"
-                month="2-digit"
-                day="2-digit"
-                hour="2-digit"
-                minute="2-digit"
-                second="2-digit"
-                :datetime="metrics.at(-1)!.lastOccurrence"
-                :locale="locale"
-              />
-            </template>
-          </i18n-t>
-        </p>
-        <i18n-t tag="p" class="text-3xl text-highlighted font-semibold" keypath="portfolio-vulnerabilities.title" />
-      </div>
+  <DashboardCard :ui="{ root: 'overflow-visible', body: '!p-0' }" class="col-span-4" :title="t('portfolio-vulnerabilities.title')">
+    <template #subtitle>
+      <i18n-t keypath="portfolio-vulnerabilities.latest-measurement">
+        <template #datetime>
+          <TimeLocale
+            year="numeric"
+            month="2-digit"
+            day="2-digit"
+            hour="2-digit"
+            minute="2-digit"
+            second="2-digit"
+            :datetime="metrics.at(-1)!.lastOccurrence"
+            :locale="locale"
+          />
+        </template>
+      </i18n-t>
     </template>
     <LineChart class="h-96" :data="portfolioChartData" :config="portfolioChartConfig" />
     <template #footer>
       <div class="grid grid-cols-5 gap-2 w-full">
         <DashboardProgressCard
+          class="lg:col-span-1 col-span-5"
           variant="soft"
           :value="latestMetric?.critical"
           :total="latestMetric?.vulnerabilities"
           :title="t('portfolio-vulnerabilities.summary.critical')"
         />
         <DashboardProgressCard
+          class="lg:col-span-1 col-span-5"
           variant="soft"
           :value="latestMetric?.high"
           :total="latestMetric?.vulnerabilities"
           :title="t('portfolio-vulnerabilities.summary.high')"
         />
         <DashboardProgressCard
+          class="lg:col-span-1 col-span-5"
           variant="soft"
           :value="latestMetric?.medium"
           :total="latestMetric?.vulnerabilities"
           :title="t('portfolio-vulnerabilities.summary.medium')"
         />
         <DashboardProgressCard
+          class="lg:col-span-1 col-span-5"
           variant="soft"
           :value="latestMetric?.low"
           :total="latestMetric?.vulnerabilities"
           :title="t('portfolio-vulnerabilities.summary.medium')"
         />
         <DashboardProgressCard
+          class="lg:col-span-1 col-span-5"
           variant="soft"
           :value="latestMetric?.unassigned"
           :total="latestMetric?.vulnerabilities"
@@ -95,7 +95,7 @@ const latestMetric = computed(() => {
         />
       </div>
     </template>
-  </UCard>
+  </DashboardCard>
 </template>
 
 <i18n lang="yaml">
