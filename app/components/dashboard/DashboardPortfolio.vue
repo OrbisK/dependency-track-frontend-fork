@@ -38,7 +38,7 @@ const latestMetric = computed(() => {
 </script>
 
 <template>
-  <DashboardCard :ui="{ root: 'overflow-visible', body: '!p-0' }" class="col-span-4" :title="t('portfolio-vulnerabilities.title')">
+  <DashboardCard :ui="{ root: 'overflow-visible', body: '!p-0' }" :title="t('portfolio-vulnerabilities.title')" class="col-span-4">
     <template #subtitle>
       <i18n-t keypath="portfolio-vulnerabilities.latest-measurement">
         <template #datetime>

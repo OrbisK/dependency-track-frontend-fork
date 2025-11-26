@@ -37,6 +37,7 @@ const localeOptions = computed(() => {
       <UPageGrid class="lg:grid-cols-4 gap-4 sm:gap-6">
         <DashboardStats :metrics="metrics" />
         <DashboardPortfolio :metrics="metrics" />
+        <DashboardPolicyViolations :metrics="metrics" />
       <!--      <HomeStats :period="period" :range="range" /> -->
       <!--      <HomeChart :period="period" :range="range" /> -->
       <!--      <HomeSales :period="period" :range="range" /> -->

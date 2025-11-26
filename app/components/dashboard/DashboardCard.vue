@@ -8,7 +8,7 @@ const props = defineProps<CardProps & {
 </script>
 
 <template>
-  <UCard v-bind="props" class="col-span-4">
+  <UCard v-bind="props">
     <template #header>
       <slot name="header">
         <p class="text-xs text-muted uppercase mb-1.5">
@@ -23,8 +23,8 @@ const props = defineProps<CardProps & {
         </p>
       </slot>
     </template>
-    <slot />
-    <template #footer>
+    <slot v-if="$slots.default" />
+    <template v-if="$slots.footer" #footer>
       <slot name="footer" />
     </template>
   </UCard>
