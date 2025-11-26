@@ -34,11 +34,12 @@ const localeOptions = computed(() => {
     </template>
 
     <template #body>
-      <UPageGrid class="lg:grid-cols-4 gap-4 sm:gap-6">
+      <div class="relative grid grid-cols-4 gap-4 sm:gap-6">
         <DashboardStats :metrics="metrics" />
         <DashboardPortfolio :metrics="metrics" />
         <DashboardPolicyViolationsState :metrics="metrics" />
-      </UPageGrid>
+        <DashboardPolicyViolationsClassification :metrics="metrics" />
+      </div>
     </template>
   </UDashboardPanel>
 </template>

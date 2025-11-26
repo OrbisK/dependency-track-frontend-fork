@@ -14,18 +14,18 @@ const policyViolationChartData = computed(() => {
     return {
       date: new Date(metric.firstOccurrence),
       values: {
-        policyViolationsFail: metric.policyViolationsFail,
-        policyViolationsWarn: metric.policyViolationsWarn,
-        policyViolationsInfo: metric.policyViolationsInfo,
+        policyViolationsSecurityTotal: metric.policyViolationsSecurityTotal,
+        policyViolationsOperationalTotal: metric.policyViolationsOperationalTotal,
+        policyViolationsLicenseTotal: metric.policyViolationsLicenseTotal,
       },
     } as const
   })
 })
 
 const policyViolationChartConfig = [
-  { key: 'policyViolationsFail', color: 'var(--ui-error)' },
-  { key: 'policyViolationsWarn', color: 'var(--ui-warning)' },
-  { key: 'policyViolationsInfo', color: 'var(--ui-info)' },
+  { key: 'policyViolationsSecurityTotal', color: 'var(--ui-error)' },
+  { key: 'policyViolationsOperationalTotal', color: 'var(--ui-warning)' },
+  { key: 'policyViolationsLicenseTotal', color: 'var(--ui-info)' },
 ] satisfies { key: keyof ApiMetric, color?: string }[] // todo
 
 const latestMetric = computed(() => {
@@ -46,23 +46,23 @@ const latestMetric = computed(() => {
         <DashboardProgressCard
           class="lg:col-span-1 col-span-5"
           variant="soft"
-          :value="latestMetric?.policyViolationsFail"
+          :value="latestMetric?.policyViolationsSecurityTotal"
           :total="latestMetric?.policyViolationsTotal"
-          :title="t('summary.policy-violations-fail')"
+          :title="t('summary.policy-violations-security-total')"
         />
         <DashboardProgressCard
           class="lg:col-span-1 col-span-5"
           variant="soft"
-          :value="latestMetric?.policyViolationsWarn"
+          :value="latestMetric?.policyViolationsOperationalTotal"
           :total="latestMetric?.policyViolationsTotal"
-          :title="t('summary.policy-violations-warn')"
+          :title="t('summary.policy-violations-operational-total')"
         />
         <DashboardProgressCard
           class="lg:col-span-1 col-span-5"
           variant="soft"
-          :value="latestMetric?.policyViolationsInfo"
+          :value="latestMetric?.policyViolationsLicenseTotal"
           :total="latestMetric?.policyViolationsTotal"
-          :title="t('summary.policy-violations-info')"
+          :title="t('summary.policy-violations-license-total')"
         />
       </div>
     </template>
@@ -72,16 +72,16 @@ const latestMetric = computed(() => {
 <i18n lang="yaml">
 en:
   title: "Policy Violations"
-  subtitle: "Policy violations by state"
+  subtitle: "Policy violations by classification"
   summary:
-    policy-violations-fail: "Violation Failures"
-    policy-violations-warn: "Violation Warnings"
-    policy-violations-info: "Informational Violations"
+    policy-violations-security-total: "Security Violations"
+    policy-violations-operational-total: "Operational Violations"
+    policy-violations-license-total: "License Violations"
 de:
   title: "Richtlinienverstöße"
-  subtitle: "Richtlinienverstöße nach Status"
+  subtitle: "Richtlinienverstöße nach Klassifikation"
   summary:
-    policy-violations-fail: "Verstoßfehler"
-    policy-violations-warn: "Verstoßwarnungen"
-    policy-violations-info: "Informationelle Verstöße"
+    policy-violations-security-total: "Sicherheitsverstöße"
+    policy-violations-operational-total: "Betriebliche Verstöße"
+    policy-violations-license-total: "Lizenzverstöße"
 </i18n>

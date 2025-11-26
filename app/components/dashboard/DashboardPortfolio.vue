@@ -38,9 +38,9 @@ const latestMetric = computed(() => {
 </script>
 
 <template>
-  <DashboardCard :ui="{ root: 'overflow-visible', body: '!p-0' }" :title="t('portfolio-vulnerabilities.title')" class="col-span-4">
+  <DashboardCard :ui="{ root: 'overflow-visible', body: '!p-0' }" :title="t('title')" class="col-span-4">
     <template #subtitle>
-      <i18n-t keypath="portfolio-vulnerabilities.latest-measurement">
+      <i18n-t keypath="latest-measurement">
         <template #datetime>
           <TimeLocale
             year="numeric"
@@ -63,35 +63,35 @@ const latestMetric = computed(() => {
           variant="soft"
           :value="latestMetric?.critical"
           :total="latestMetric?.vulnerabilities"
-          :title="t('portfolio-vulnerabilities.summary.critical')"
+          :title="t('summary.critical')"
         />
         <DashboardProgressCard
           class="lg:col-span-1 col-span-5"
           variant="soft"
           :value="latestMetric?.high"
           :total="latestMetric?.vulnerabilities"
-          :title="t('portfolio-vulnerabilities.summary.high')"
+          :title="t('summary.high')"
         />
         <DashboardProgressCard
           class="lg:col-span-1 col-span-5"
           variant="soft"
           :value="latestMetric?.medium"
           :total="latestMetric?.vulnerabilities"
-          :title="t('portfolio-vulnerabilities.summary.medium')"
+          :title="t('summary.medium')"
         />
         <DashboardProgressCard
           class="lg:col-span-1 col-span-5"
           variant="soft"
           :value="latestMetric?.low"
           :total="latestMetric?.vulnerabilities"
-          :title="t('portfolio-vulnerabilities.summary.medium')"
+          :title="t('summary.low')"
         />
         <DashboardProgressCard
           class="lg:col-span-1 col-span-5"
           variant="soft"
           :value="latestMetric?.unassigned"
           :total="latestMetric?.vulnerabilities"
-          :title="t('portfolio-vulnerabilities.summary.unassigned')"
+          :title="t('summary.unassigned')"
         />
       </div>
     </template>
@@ -100,23 +100,21 @@ const latestMetric = computed(() => {
 
 <i18n lang="yaml">
 en:
-  portfolio-vulnerabilities:
-    title: "Portfolio Vulnerabilities"
-    latest-measurement: "Last Measurement: {datetime}"
-    summary:
-      critical: "Critical"
-      high: "High"
-      medium: "High"
-      low: "Low"
-      unassigned: "Unassigned"
+  title: "Portfolio Vulnerabilities"
+  latest-measurement: "Last Measurement: {datetime}"
+  summary:
+    critical: "Critical"
+    high: "High"
+    medium: "Medium"
+    low: "Low"
+    unassigned: "Unassigned"
 de:
-  portfolio-vulnerabilities:
-    title: "Portfolio Schwachstellen"
-    latest-measurement: "Letzte Messung: {datetime}"
-    summary:
-      critical: "Kritisch"
-      high: "Hoch"
-      medium: "Mittel"
-      low: "Niedrig"
-      unassigned: "Nicht zugewiesen"
+  title: "Portfolio Schwachstellen"
+  latest-measurement: "Letzte Messung: {datetime}"
+  summary:
+    critical: "Kritisch"
+    high: "Hoch"
+    medium: "Mittel"
+    low: "Niedrig"
+    unassigned: "Nicht zugewiesen"
 </i18n>

@@ -61,7 +61,6 @@ const chartData = computed(() => {
     :ui="{
       container: 'gap-y-1.5 !p-1',
       wrapper: 'items-center',
-      // leading: 'p-2.5 rounded-full bg-primary/10 ring ring-inset ring-primary/25 flex-col', // todo
     }"
     class="lg:col-span-1 md:col-span-2 col-span-4"
   >
@@ -69,7 +68,7 @@ const chartData = computed(() => {
       <span class="p-2">{{ stat.title }}</span>
     </template>
     <LineChart
-      class="h-26" :data="chartData" :config="[{
+      class="h-26 mt-auto" :data="chartData" :config="[{
         key: stat.key,
       }]"
     />
