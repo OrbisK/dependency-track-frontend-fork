@@ -2,6 +2,15 @@
 import type { ApiMetric } from '~/types/api'
 import * as locales from '@nuxt/ui/locale'
 
+const { t } = useI18n({
+  useScope: 'local',
+})
+
+useSeoMeta({
+  title: t('seo.title'),
+  description: t('seo.description'),
+})
+
 const { $api } = useNuxtApp()
 
 const { data: metrics } = await useAsyncData('portfolio-metrics-90-days', (_, { signal }) => {
@@ -43,3 +52,15 @@ const localeOptions = computed(() => {
     </template>
   </UDashboardPanel>
 </template>
+
+<i18n>
+en:
+  seo:
+    title: "Dashboard"
+    description: "Overview of your portfolio's security metrics and policy violations."
+
+de:
+  seo:
+    title: "Dashboard"
+    description: "Übersicht über die Sicherheitsmetriken und Richtlinienverstöße Ihres Portfolios."
+</i18n>

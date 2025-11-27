@@ -11,8 +11,8 @@ const { t } = useI18n({
 })
 
 useSeoMeta({
-  title: t('title'),
-  description: t('description'),
+  title: t('seo.title'),
+  description: t('seo.description'),
 })
 
 const schema = z.object({
@@ -63,6 +63,9 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
 
 <i18n lang="yaml">
 en:
+  seo:
+    title: "Login"
+    description: "Sign In to your account"
   title: "Login"
   description: "Sign In to your account"
   error: "Error signing in"
@@ -75,6 +78,9 @@ en:
     password:
       required: "Password is required"
 de:
+  seo:
+    title: "Anmeldung"
+    description: "Melden Sie sich bei Ihrem Konto an"
   title: "Anmeldung"
   description: "Melden Sie sich bei Ihrem Konto an"
   error: "Fehler bei der Anmeldung"
