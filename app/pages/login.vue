@@ -54,7 +54,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UAuthForm :schema="schema" :title="t('title')" :fields="fields" class="max-w-md" :description="t('description')" @submit="onSubmit">
+  <UAuthForm :schema="schema" :title="t('title')" :fields="fields" class="max-w-md" :description="t('description')" @submit.prevent="onSubmit">
     <template v-if="loginError" #validation>
       <UAlert color="error" icon="i-lucide-info" title="Error signing in" />
     </template>
