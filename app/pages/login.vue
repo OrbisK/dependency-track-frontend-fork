@@ -4,6 +4,7 @@ import * as z from 'zod'
 
 definePageMeta({
   layout: 'auth',
+  guest: true,
 })
 
 const { t } = useI18n({

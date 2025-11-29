@@ -1,6 +1,8 @@
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
-  const { token } = useJwt()
+  const jwtStore = useJwtStore()
+  const { token } = storeToRefs(jwtStore)
+  const localeRoute = useLocaleRoute()
 
   const headers: HeadersInit = {
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -12,6 +14,12 @@ export default defineNuxtPlugin(() => {
     async onRequest({ options }) {
       if (token.value) {
         options.headers.set('Authorization', `Bearer ${token.value}`)
+      }
+    },
+    async onResponseError({ response }) {
+      if (response.status === 401) {
+        token.value = ''
+        navigateTo(localeRoute({ name: 'login' }))
       }
     },
   })

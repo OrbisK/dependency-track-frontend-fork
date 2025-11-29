@@ -8,7 +8,7 @@ interface Payload {
   permissions: Array<string>
 }
 
-export function useJwt() {
+export const useJwtStore = defineStore('jwt', () => {
   const token = useCookie('token', { default: () => '' })
   const { payload } = _useJwt<Payload>(token)
 
@@ -16,4 +16,7 @@ export function useJwt() {
     token,
     payload,
   }
-}
+})
+
+if (import.meta.hot)
+  import.meta.hot.accept(acceptHMRUpdate(useJwtStore, import.meta.hot))

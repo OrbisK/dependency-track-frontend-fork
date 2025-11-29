@@ -7,12 +7,16 @@ defineProps<{
 
 const colorMode = useColorMode()
 
-const user = ref({
-  name: 'John Doe',
+const authStore = useAuthStore()
+
+const { user: authUser } = storeToRefs(authStore)
+
+const user = computed(() => ({
+  name: authUser.value?.fullname,
   avatar: {
-    alt: 'John Doe',
+    alt: authUser.value?.fullname,
   },
-})
+}))
 
 const { t } = useI18n({
   useScope: 'local',
