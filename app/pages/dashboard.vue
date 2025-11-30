@@ -48,6 +48,8 @@ const localeOptions = computed(() => {
         <DashboardPortfolio :metrics="metrics" />
         <DashboardPolicyViolationsState :metrics="metrics" />
         <DashboardPolicyViolationsClassification :metrics="metrics" />
+        <DashboardAuditingProgressFindings :metrics="metrics" />
+        <DashboardAuditingProgressViolations :metrics="metrics" />
       </div>
     </template>
   </UDashboardPanel>

@@ -17,7 +17,7 @@ useI18n()
   <UCard v-bind="props" :ui="{ body: 'h-full' }">
     <div class="flex flex-col items-center h-full justify-end gap-1">
       <slot>
-        <p class="text-xs text-muted uppercase">
+        <p class="text-xs text-muted uppercase text-center">
           {{ props.title }}
         </p>
       </slot>
