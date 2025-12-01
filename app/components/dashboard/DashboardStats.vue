@@ -5,85 +5,126 @@ const { metrics } = defineProps<{
   metrics: ApiMetric[]
 }>()
 
-interface Stat {
-  title: string
-  key: keyof ApiMetric
-  to?: string // todo -> link does not work with hover atm
-}
-
 const { t } = useI18n({
   useScope: 'local',
 })
 
-const stats = computed<Stat[]>(() => {
-  // todo link with querys
-  return [
-    {
-      title: t('vulnerabilities'),
-      key: 'vulnerabilities',
-      // to: '/vulnerabilities',
-    },
-    {
-      title: t('vulnerableProjects'),
-      key: 'vulnerableProjects',
-      // to: '/projects',
-    },
-    {
-      title: t('vulnerableComponents'),
-      key: 'vulnerableComponents',
-      // to: '/components',
-    },
-    {
-      title: t('inheritedRiskScore'),
-      key: 'inheritedRiskScore',
-      // to: '/todo',
-    },
-  ] satisfies Stat[]
+const latestMetric = computed(() => {
+  return metrics.at(-1)
 })
 
-const chartData = computed(() => {
-  return metrics.map((metric) => {
-    return {
-      date: new Date(metric.firstOccurrence),
-      values: metric,
-    }
-  })
+const stats = computed(() => {
+  return [
+    {
+      title: t('stats.projects'),
+      value: latestMetric.value?.projects ?? 0,
+      color: 'info',
+    },
+    {
+      title: t('stats.vulnerableProjects'),
+      value: latestMetric.value?.vulnerableProjects ?? 0,
+      color: 'error',
+    },
+    {
+      title: t('stats.components'),
+      value: latestMetric.value?.components ?? 0,
+      color: 'info',
+    },
+    {
+      title: t('stats.vulnerableComponents'),
+      value: latestMetric.value?.vulnerableComponents ?? 0,
+      color: 'error',
+    },
+    {
+      title: t('stats.vulnerabilities'),
+      value: latestMetric.value?.vulnerabilities ?? 0,
+      color: 'error',
+    },
+    {
+      title: t('stats.suppressed'),
+      value: latestMetric.value?.suppressed ?? 0,
+      color: 'warning',
+    },
+    {
+      title: t('stats.policyViolationsTotal'),
+      value: latestMetric.value?.policyViolationsTotal ?? 0,
+      color: 'info',
+    },
+    {
+      title: t('stats.policyViolationsLicenseTotal'),
+      value: latestMetric.value?.policyViolationsLicenseTotal ?? 0,
+      color: 'info',
+    },
+    {
+      title: t('stats.policyViolationsOperationalTotal'),
+      value: latestMetric.value?.policyViolationsOperationalTotal ?? 0,
+      color: 'info',
+    },
+    {
+      title: t('stats.policyViolationsSecurityTotal'),
+      value: latestMetric.value?.policyViolationsSecurityTotal ?? 0,
+      color: 'info',
+    },
+  ] as const
 })
 </script>
 
 <template>
-  <UPageCard
-    v-for="(stat, index) in stats"
-    :key="index"
-    :title="String(metrics.at(-1)?.[stat.key] ?? 0)"
-    :to="stat.to"
-    variant="subtle"
-    :ui="{
-      container: 'gap-y-1.5 !p-1',
-      wrapper: 'items-center',
-    }"
-    class="lg:col-span-1 md:col-span-2 col-span-4"
+  <DashboardCard
+    :title="t('title')"
+    class="col-span-4"
   >
-    <template #leading>
-      <span class="p-2">{{ stat.title }}</span>
-    </template>
-    <LineChart
-      class="h-26 mt-auto" :data="chartData" :config="[{
-        key: stat.key,
-      }]"
-    />
-  </UPageCard>
+    <UPageGrid
+      class="gap-3"
+    >
+      <UPageCard
+        v-for="(stat, index) in stats"
+        :key="index"
+        :title="String(stat.value ?? 0)"
+        variant="subtle"
+        :ui="{
+          wrapper: 'items-center',
+        }"
+      >
+        <template #leading>
+          <UBadge
+            size="md"
+            :color="stat.color"
+            variant="outline"
+          >
+            {{ stat.title }}
+          </UBadge>
+        </template>
+      </UPageCard>
+    </UPageGrid>
+  </DashboardCard>
 </template>
 
 <i18n lang="yaml">
 en:
-  vulnerabilities: "Portfolio Vulnerabilities"
-  vulnerableProjects: "Vulnerable Projects"
-  vulnerableComponents: "Vulnerable Components"
-  inheritedRiskScore: "Inherited Risk Score"
+  title: "Portfolio Statistics"
+  stats:
+    projects: "Projects"
+    vulnerableProjects: "Vulnerable Projects"
+    components: "Components"
+    vulnerableComponents: "Vulnerable Components"
+    vulnerabilities: "Portfolio Vulnerabilities"
+    suppressed: "Vulnerabilities"
+    policyViolationsTotal: "Policy Violations"
+    policyViolationsLicenseTotal: "License Violations"
+    policyViolationsOperationalTotal: "Operational Violations"
+    policyViolationsSecurityTotal: "Security Violations"
 de:
-  vulnerabilities: "Portfolio Schwachstellen"
-  vulnerableProjects: "Gefährdete Projekte"
-  vulnerableComponents: "Gefährdete Komponenten"
-  inheritedRiskScore: "Vererbter Risikowert"
+  title: "Portfolio-Statistiken"
+  stats:
+    projects: "Projekte"
+    vulnerableProjects: "Verwundbare Projekte"
+    components: "Komponenten"
+    vulnerableComponents: "Verwundbare Komponenten"
+    vulnerabilities: "Portfolio-Schwachstellen"
+    suppressed: "Unterdrückte Schwachstellen"
+    policyViolationsTotal: "Richtlinienverstöße"
+    policyViolationsLicenseTotal: "Lizenzverstöße"
+    policyViolationsOperationalTotal: "Betriebliche Verstöße"
+    policyViolationsSecurityTotal: "Sicherheitsverstöße"
 </i18n>

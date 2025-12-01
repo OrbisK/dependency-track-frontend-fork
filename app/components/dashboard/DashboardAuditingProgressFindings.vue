@@ -10,7 +10,7 @@ const { t } = useI18n({
 })
 
 const auditingProgressChartData = computed(() => {
-  return metrics.map((metric) => {
+  const chartMetrics = metrics.map((metric) => {
     return {
       date: new Date(metric.firstOccurrence),
       values: {
@@ -19,6 +19,16 @@ const auditingProgressChartData = computed(() => {
       },
     } as const
   })
+
+  chartMetrics.push({
+    date: new Date(metrics.at(-1)?.lastOccurrence ?? Date.now()),
+    values: {
+      findingsTotal: metrics.at(-1)?.findingsTotal ?? 0,
+      findingsAudited: metrics.at(-1)?.findingsAudited ?? 0,
+    },
+  } as const)
+
+  return chartMetrics
 })
 
 const auditingProgressChartConfig = [

@@ -18,7 +18,7 @@ const portfolioChartConfig = [
 ] satisfies { key: keyof ApiMetric, color?: string }[] // todo
 
 const portfolioChartData = computed(() => {
-  return metrics.map((metric) => {
+  const chartMetrics = metrics.map((metric) => {
     return {
       date: new Date(metric.firstOccurrence),
       values: {
@@ -30,6 +30,19 @@ const portfolioChartData = computed(() => {
       },
     } as const
   })
+
+  chartMetrics.push({
+    date: new Date(metrics.at(-1)?.lastOccurrence ?? Date.now()),
+    values: {
+      critical: metrics.at(-1)?.critical ?? 0,
+      high: metrics.at(-1)?.high ?? 0,
+      medium: metrics.at(-1)?.medium ?? 0,
+      low: metrics.at(-1)?.low ?? 0,
+      unassigned: metrics.at(-1)?.unassigned ?? 0,
+    },
+  } as const)
+
+  return chartMetrics
 })
 
 const latestMetric = computed(() => {

@@ -10,7 +10,7 @@ const { t } = useI18n({
 })
 
 const policyViolationChartData = computed(() => {
-  return metrics.map((metric) => {
+  const chartMetrics = metrics.map((metric) => {
     return {
       date: new Date(metric.firstOccurrence),
       values: {
@@ -20,6 +20,17 @@ const policyViolationChartData = computed(() => {
       },
     } as const
   })
+
+  chartMetrics.push({
+    date: new Date(metrics.at(-1)?.lastOccurrence ?? Date.now()),
+    values: {
+      policyViolationsSecurityTotal: metrics.at(-1)?.policyViolationsSecurityTotal ?? 0,
+      policyViolationsOperationalTotal: metrics.at(-1)?.policyViolationsOperationalTotal ?? 0,
+      policyViolationsLicenseTotal: metrics.at(-1)?.policyViolationsLicenseTotal ?? 0,
+    },
+  } as const)
+
+  return chartMetrics
 })
 
 const policyViolationChartConfig = [
